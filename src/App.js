@@ -1,78 +1,49 @@
 
 import React, { useState, useEffect } from 'react';
 import generateEmoji from './emoji';
+import cuss from './cuss'
 import './App.css';
 function App() {
-  
+
   const [gaali, setGaali] = useState('');
-  const [emoji , setEmoji] = useState('😝')
+  const [emoji, setEmoji] = useState('😝')
+  var myHeaders = new Headers();
+  myHeaders.append("apikey", "RdjLZk8iRWhN2whZ1lvetJBKSb6M0Ll5");
 
   useEffect(() => {
     generateGaali()
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
-  const generateGaali = async() => {
+  const generateGaali = async () => {
     setEmoji(generateEmoji)
-    
-    try {
-      const response = await fetch('http://159.65.159.8/profile_approval/hindi_abuse', {
-        // 👇️ remove this
-       // mode: 'no-cors', // 👈️
-        method: 'GET',
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "OPTIONS, GET",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization"
-        },
-      });
-    
-     
-      const result = JSON.stringify(response);
-      console.log(result.response);
-      setGaali(result?.response)
-     
-     // return result;
 
-    } catch (err) {
-      setGaali('MAHESH DALLE')
-      console.log(err);
-    }
+    setGaali(cuss)
 
-    // fetch('http://159.65.159.8/profile_approval/hindi_abuse', { mode: 'no-cors' })
-    //   .then(function (response) {
-    //     let ss = response.json()
-    //     console.log(ss);
-    //     setEmoji(generateEmoji)
-
-        
-    //     setGaali(response.body)
-
-
-    //   }).catch(function (error) {
-    //     console.log('Request failed', error)
-    //   });
   }
   return (
     <div className="App">
-      <header className="App-header">
-        <p style={{fontSize:128}}>{emoji}</p>
+      <header className='App-header'>
+     
+        <p style={{ fontSize: 128 , margin:8 }}>{emoji}</p>
 
-        <h3>{gaali}</h3>
+        <h3 style={{ fontSize: 100 , margin:8 }}>{gaali}</h3>
 
         <p>
           Random Gaali Generator
         </p>
 
         <button style={{
-          marginTop:'32px',
+          marginTop: '32px',
+          marginBottom: '32px',
           padding: '16px',
           width: '120px',
           boxShadow: '0px 0px 7px 2px gray',
           background: 'antiquewhite',
           borderRadius: '8px'
         }} onClick={generateGaali}>generate</button>
-      </header>
-
+    
+    </header>
 
 
     </div>
